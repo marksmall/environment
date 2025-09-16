@@ -1,6 +1,6 @@
 [user]
 	name = Mark Small
-	email = mark.small@astrosat.space
+	email = mark.small@telespazio.com
 
 [color]
         diff = auto
@@ -32,6 +32,7 @@
 	showDirtyState = true
 [diff]
 [init]
+	defaultBranch = main
 [push]
 	default = current
 [merge]
