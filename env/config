@@ -1,73 +1,42 @@
-Host homer
-  Port 1973
-  Hostname 217.155.193.113
+Host Agrimetrics_Github
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_agrimetrics
+
+Host copydataadmin
+  HostName 4.234.150.94
+  User dsp3user
+  Port 22
+  IdentityFile ~/.ssh/copydata-key
+
+Host copydata
+  HostName 4.234.150.94
   User msmall
+  Port 22
+  IdentityFile ~/.ssh/copydata-key
+  # pass tH7lx-9fZoLm-p3
 
-Host lisa
-  Port 1973
-  Hostname 192.168.178.58
+Host dataprocessing
+  HostName 172.26.16.168
   User msmall
+  Port 22
+  #IdentityFile ~/.ssh/dataprocessing
 
-Host hibees
-  Port 1973
-  Hostname 192.168.178.39
+Host crii-server
+  HostName 172.26.16.36
   User msmall
+  Port 22
+  IdentityFile ~/.ssh/crii
 
-Host office
-  Hostname office.astrosat.space
-  User mark.small
+Host crii-frontend
+  HostName 172.26.17.36
+  User msmall
+  Port 22
+  IdentityFile ~/.ssh/crii
 
-# Astrosat
-Host data1
-    Hostname 192.168.100.23
-    User mark.small
-    ProxyJump office
-Host data2
-    Hostname 192.168.100.24
-    User mark.small
-    ProxyJump office
-Host discovery
-    Hostname 192.168.100.28
-    User mark.small
-    ProxyJump office
-Host rusty1
-  HostName 192.168.100.41
-    User mark.small
-    ProxyJump office
-Host rusty2
-  HostName 192.168.100.42
-    User mark.small
-    ProxyJump office
+Host wqa-tunnel
+  HostName 20.162.203.65
+  User azureuser
+  LocalForward 5432 localhost:5432
+  IdentityFile ~/.ssh/ssh_tunnel.pem
 
-# Thermcert
-Host manager
-  HostName 18.203.47.205
-  User ubuntu
-
-Host ds-manager-1
-    Hostname 172.16.0.34
-    User ubuntu
-    IdentityFile ~/downloads/secrets/aws_private_keys/common-default.pem
-
-# Vagrant
-Host rusty
-  HostName 127.0.0.1
-  User vagrant
-  Port 2222
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentityFile /home/msmall/dev/projects/github/copernicus-infrastructure/.vagrant/machines/rusty/virtualbox/private_key
-  IdentitiesOnly yes
-  LogLevel FATAL
-
-Host default
-  HostName 127.0.0.1
-  User vagrant
-  Port 2222
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentityFile /home/msmall/dev/projects/vagrant/infrastructure/.vagrant/machines/default/virtualbox/private_key
-  IdentitiesOnly yes
-  LogLevel FATAL
