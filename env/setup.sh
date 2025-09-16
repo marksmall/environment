@@ -54,11 +54,11 @@ ln -s $DIR/ackrc $HOME/.ackrc
 ln -s $DIR/config $HOME/.ssh/config
 
 # Setup pathogen for vim.
-mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpope/pathogen.vim
 
 ## Add vim plugins
 cd ~/.vim/bundle
-git clone git://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/altercation/vim-colors-solarized.git
 git clone git://github.com/tpope/vim-sensible.git
 
 # Add TMUX Plugin manager
