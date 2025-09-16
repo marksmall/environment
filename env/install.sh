@@ -1,35 +1,56 @@
 #!/bin/bash
 
-sudo apt install -y zsh emacs-nox tmux apt-transport-https aptitude ca-certificates curl gnupg2 imagemagick inkscape meld ripgrep software-properties-common powerline vim
-
-#curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-#add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
-
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main"
-
-#curl -fsSL https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
-#curl -fsSL https://slack.com/gpg/slack_pubkey.gpg | apt-key add -
-#wget -q https://slack.com/gpg/slack_pubkey.gpg -O- | apt-key add -
-#add-apt-repository "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main"
-
-#curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
-#add-apt-repository "deb http://repository.spotify.com stable non-free"
-
-#curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-#add-apt-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-
-wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
-
-#curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-#add-apt-repository "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ buster main"
-
-#wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O- | sudo apt-key add -
-
+# Update and upgrade existing setup
+sudo apt update
 sudo apt upgrade
-sudo apt install -y code docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin google-chrome-stable jq keypassxc
 
-# For pyenv
+# Install generic apps wanted
+sudo apt install -y zsh emacs-nox tmux apt-transport-https aptitude ca-certificates curl gnupg2 imagemagick inkscape meld ripgrep software-properties-common powerline vim jq keepassxc
+
+# Setup GPG keyring
+sudo mkdir -p /etc/apt/keyrings
+
+# Docker setup
+# Add Docker's official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Helm
+sudo apt-get install curl gpg apt-transport-https --yes
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+# Add repo with explicit signed-by
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+## VS Code setup
+# Import Microsoft GPG key
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg
+
+# Add repo with explicit signed-by
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] http://packages.microsoft.com/repos/vscode stable main" \
+    | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+
+# Google Chrome
+# Import Google's GPG key
+wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
+
+# Add repo with explicit signed-by
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
+  | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+
+# # Setup YAML CLI parser
+sudo add-apt-repository -y ppa:rmescandon/yq
+
+# Re-update the sources list
+sudo apt update
+
+# Install from imported PPAs
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin helm code google-chrome-stable jq
+
+# For python
 sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev libffi-dev liblzma-dev libreadline-dev tk-dev
-
