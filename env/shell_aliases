@@ -143,7 +143,6 @@ alias psit='mplayer -ss 1530 -endpos 25:30 ~/docs/mystuff/skateboarding/SMS1.mp4
 alias fsit='mplayer -ss 1855 -endpos 35:00 ~/docs/mystuff/skateboarding/SMS1.mp4'
 alias hflp='mplayer -ss 2100 -endpos 41:25 ~/docs/mystuff/skateboarding/SMS1.mp4'
 alias kflp='mplayer -ss 2485 -endpos 48:35 ~/docs/mystuff/skateboarding/SMS1.mp4'
-
 # Bastion login
 alias bas='ssh mark.small@bastion.eu-west-1.testing.astrosat.net -D 5555'
 
@@ -154,28 +153,6 @@ function dcsec {
 
   /bin/kubectl get secret -n ${namespace} ${secret} -o json | jq '.data | map_values(@base64d)'
 }
-
-function mmodb {
-  local pod=${1:?"Pod to forward to"}
-  local namespace=${2:?"Namespace of pod"}
-  local port=${3:?"Local port to use"}
-  
-  kubectl -n ${namespace} port-forward pod/${pod} ${port}:27017
-}
-
-# minikube
-alias mk='minikube'
-alias mks='minikube start'
-alias mksp='minikube stop'
-alias mkst='minikube status'
-alias mkt='minikube tunnel'
-alias mkcv='minikube config view'
-alias mkcg='minikube config get'
-alias mkcs='minikube config set'
-alias mknl='minikube node list'
-alias mkd='minikube delete'
-alias mkpl='minikube profile list'
-
 # helm
 alias hrl='helm repo list'
 alias hra='helm repo add'
@@ -186,18 +163,13 @@ alias hun='helm uninstall --keep-history'
 alias hst='helm status'
 alias hrb='helm rollback'
 alias hsr='helm search repo -l'
-
 # asdf version manager
 alias apa='asdf plugin add'
 alias apla='asdf plugin list all'
 alias al='asdf list'
 alias ai='asdf install'
-
 # Telespazio
 alias dsp3='cd ~/dev/projects/github/telespazio/dsp3'
-
 # Agrimetrics
 alias aggl='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics" gl'
 alias ag='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics"'
-
-alias datesec='date -d'
