@@ -1,5 +1,4 @@
 # Aliases
-
 alias watch='watch '
 alias top='htop'
 alias vless='vim -u /usr/share/vim/vimcurrent/macros/less.vim'
@@ -23,6 +22,7 @@ alias df='df -h'
 alias vi='vim'
 #alias ssh='ssh -X'
 alias dc='cd'
+
 # Query the debian package manager database on already installed packages.
 # USAGE: cinst <pkgname>.
 alias cinst='dpkg -l | egrep'
@@ -77,68 +77,34 @@ alias gsu='git submodule update --init --recursive'
 alias gpa='for f in `ls`; do echo $f; cd $f; git pull; cd ..; done'
 alias gpn='git push --no-verify'
 alias grev='git revert'
-
 alias diff='colordiff -u'
-
-# Docker Aliases
-alias dps='docker ps -a'
-alias dk='docker kill'
-alias drm='docker rm -v'
-alias dti='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
-alias de='docker exec -it'
-alias dla='docker container ls -a'
-alias dil='docker image ls'
-alias di='docker image' ls'
-alias di='docker image' rm'
-alias dcc='docker commit -p'
-alias dcl='docker load -i'
-alias dip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-# Start docker compose in `detatched` mode.
-alias ddup='docker-compose up -d --build'
-# Start docker compose in `interactive` mode.
-alias dup='docker compose up --build'
-alias dce='docker compose exec'
-alias dh='docker stop'
-# Run command in already running container e.g. dr <image name< <command>
-alias dr='docker run -it'
-alias dre='docker run -it --entrypoint /bin/bash'
-alias dcrup='docker-compose build --force-rm --no-cache'
-alias dce='docker compose exec'
 
 function drl() {
   docker run --rm -it "$1" bash
 }
-
 function dsh() {
   docker exec -it "$1" /bin/bash
 }
-
 function dex() {
   docker save -o "$1".tar "$1"
 }
-
 function ri() {
   convert $1 -resize $2\! $3
 }
-
 function ksdv() {
   kubectl get secret $1 -o yaml | grep $2 | awk '{print $2}' | base64 --decode
 }
-
 function kas() {
   kubectl get secret $1 -o json | jq '.data | with_entries(.value |= @base64d)'
 }
-
 function kph() {
   kubectl describe pods -l app=$1,instance=$2 | grep -A 5 Conditions
 }
-
 # AWS CLI aliases
 alias al1='eval $(aws ecr get-login --no-include-email --region eu-west-1)'
 alias al2='aws ecr get-login-password --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
 
 alias gup='for f in `ls`; do cd $f; git pull; cd ..; done'
-
 # terraform aliases
 alias tf='terraform fmt'
 alias tv='terraform validate'
@@ -150,22 +116,17 @@ alias ti='terraform init'
 alias tsh='terraform show'
 alias tdes='terraform '
 alias tdes='terraform '
-
 # terragrunt aliases
 alias tgi='terragrunt init'
 alias tgp='terragrunt plan'
 alias tga='terragrunt apply'
 # alias tgaa='terragrunt apply-all'
 alias tgap='terragrunt apply -auto-approve'
-
 alias rq='convert -strip -quality'
-
 # Get all pods in Terminated / Evicted State
 alias epods='kubectl get pods -n default | egrep -i "Terminated|Evicted" | awk "{print $1 }"'
 alias depods='kubectl get pods -n default | egrep -i "Terminated|Evicted" | cut -d " " -f 1 | xargs kubectl delete pod --force=true --wait=false --grace-period=0'
-
 alias experimentation='ssh -i ~/downloads/orbis_experimentation_management ubuntu@54.73.142.239 -D 5555'
-
 # Skateboarding
 alias ollie='mplayer -ss 776 -endpos 17:20 ~/docs/mystuff/skateboarding/SMS1.mp4'
 alias f180='mplayer -ss 1040 -endpos 21:15 ~/docs/mystuff/skateboarding/SMS1.mp4'
