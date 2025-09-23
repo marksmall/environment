@@ -102,8 +102,16 @@ function kph() {
 }
 # AWS CLI aliases
 alias al1='eval $(aws ecr get-login --no-include-email --region eu-west-1)'
-alias al2='aws ecr get-login-password --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
-
+alias al2='aws ecr get-login-password --profile common-ecr --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
+alias als='aws s3 ls --human-readable'
+alias acp='aws s3 cp '
+alias alwqa='als s3://defra-public-registers/WQA/'
+alias acpwqa='acp s3://defra-public-registers/WQA/'
+function acpr() {
+  aws s3 ls $1 | awk '{print $4}' | while read file; do
+  aws s3 cp s3://your-bucket-name/path/$file $2
+done
+}
 alias gup='for f in `ls`; do cd $f; git pull; cd ..; done'
 # terraform aliases
 alias tf='terraform fmt'
