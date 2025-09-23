@@ -53,6 +53,9 @@ ln -s $DIR/tmux.conf $HOME/.tmux.conf
 ln -s $DIR/ackrc $HOME/.ackrc
 ln -s $DIR/config $HOME/.ssh/config
 
+# Setup homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # Setup pathogen for vim.
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpope/pathogen.vim
 
