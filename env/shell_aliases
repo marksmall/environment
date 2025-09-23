@@ -146,12 +146,12 @@ alias kflp='mplayer -ss 2485 -endpos 48:35 ~/docs/mystuff/skateboarding/SMS1.mp4
 # Bastion login
 alias bas='ssh mark.small@bastion.eu-west-1.testing.astrosat.net -D 5555'
 
-# kubectl
+# Kubectl
 function dcsec {
   local secret=${1:?"Secret to decode must be specified as first parameter"}
   local namespace=${2:="default"}
 
-  /bin/kubectl get secret -n ${namespace} ${secret} -o json | jq '.data | map_values(@base64d)'
+  kubectl get secret -n ${namespace} ${secret} -o json | jq '.data | map_values(@base64d)'
 }
 # helm
 alias hrl='helm repo list'
