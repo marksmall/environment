@@ -15,7 +15,6 @@ alias la='ls -lah --color=auto'
 alias ld='ls -lahd --color=auto */'
 # Get a long listing of files by date descending.
 alias lt='ls -lhrt --color=auto'
-
 # List process owned by current user.
 alias mps='ps -fu $USER'
 alias h='history'
@@ -24,7 +23,6 @@ alias df='df -h'
 alias vi='vim'
 #alias ssh='ssh -X'
 alias dc='cd'
-
 # Query the debian package manager database on already installed packages.
 # USAGE: cinst <pkgname>.
 alias cinst='dpkg -l | egrep'
@@ -47,11 +45,9 @@ alias pdesc='apt-cache show'
 alias upd='apt-get update'
 alias upg='apt-get upgrade'
 alias dist='apt-get dist-upgrade'
-alias hold=apt-mark hold'
-alias unhold=apt-mark unhold'
+alias hold='apt-mark hold'
+alias unhold='apt-mark unhold'
 alias afl='apt-file list'
-
-
 alias gt='git tag -n'
 alias gm='git merge --ff-only'
 alias gd='git diff -w --'
