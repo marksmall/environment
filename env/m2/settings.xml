@@ -6,42 +6,42 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       
-      <repositories>
-        <repository>
-          <id>edina-repository</id>
-          <name>Local Repository for Maven</name>
-          <url>https://geodev.edina.ac.uk/maven-repository</url>
-          <layout>default</layout>
-          <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases>
-          <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
-        </repository>
-      </repositories>
+      <!-- <repositories> -->
+      <!--   <repository> -->
+      <!--     <id>edina-repository</id> -->
+      <!--     <name>Local Repository for Maven</name> -->
+      <!--     <url>https://geodev.edina.ac.uk/maven-repository</url> -->
+      <!--     <layout>default</layout> -->
+      <!--     <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases> -->
+      <!--     <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots> -->
+      <!--   </repository> -->
+      <!-- </repositories> -->
       
-      <pluginRepositories>
-        <pluginRepository>
-          <id>edina</id>
-          <name>Local Repository for Maven</name>
-          <url>https://geodev.edina.ac.uk/maven-repository</url>
-          <layout>default</layout>
-          <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases>
-          <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
-        </pluginRepository>
-      </pluginRepositories>
+      <!-- <pluginRepositories> -->
+      <!--   <pluginRepository> -->
+      <!--     <id>edina</id> -->
+      <!--     <name>Local Repository for Maven</name> -->
+      <!--     <url>https://geodev.edina.ac.uk/maven-repository</url> -->
+      <!--     <layout>default</layout> -->
+      <!--     <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases> -->
+      <!--     <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots> -->
+      <!--   </pluginRepository> -->
+      <!-- </pluginRepositories> -->
     </profile>
   </profiles>
 
   <servers>
-    <server>
-      <id>edina-site</id>
-      <username>msmall1</username>
-    </server>
-    <server>
-      <id>edina-repository</id>
-      <username>msmall1</username>
-    </server>
-    <server>
-      <id>edina-snapshot-repository</id>
-      <username>msmall1</username>
-    </server>
+    <!-- <server> -->
+    <!--   <id>edina-site</id> -->
+    <!--   <username>msmall1</username> -->
+    <!-- </server> -->
+    <!-- <server> -->
+    <!--   <id>edina-repository</id> -->
+    <!--   <username>msmall1</username> -->
+    <!-- </server> -->
+    <!-- <server> -->
+    <!--   <id>edina-snapshot-repository</id> -->
+    <!--   <username>msmall1</username> -->
+    <!-- </server> -->
   </servers>
 </settings>

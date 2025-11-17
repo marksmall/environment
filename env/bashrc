@@ -62,3 +62,5 @@ alias egd="wget --post-file gp_test_srs.xml -O srs_test.gml --header 'Content-Ty
 
 alias vless='vim -u $HOME/local/apps/vim/less.vim'
 
+
+complete -C /usr/bin/terraform terraform

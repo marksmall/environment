@@ -1,9 +1,11 @@
 # Aliases
 
+alias watch='watch '
 alias top='htop'
 alias vless='vim -u /usr/share/vim/vimcurrent/macros/less.vim'
 alias rm='rm -v'
 alias pjson='python -m json.tool'
+alias generate-secret='openssl rand -base64 32'
 
 # Get a long listing using colours and human readable values for file size.
 alias l='ls -lh --color=auto'
@@ -46,8 +48,8 @@ alias pdesc='apt-cache show'
 alias upd='apt-get update'
 alias upg='apt-get upgrade'
 alias dist='apt-get dist-upgrade'
-alias hold=apt-mark hold'
-alias unhold=apt-mark unhold'
+alias hold='apt-mark hold'
+alias unhold='apt-mark unhold'
 alias afl='apt-file list'
 
 
@@ -84,27 +86,28 @@ alias grev='git revert'
 alias diff='colordiff -u'
 
 # Docker Aliases
-alias dps='docker ps -a'
-alias dk='docker kill'
-alias drm='docker rm -v'
-alias dti='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
-alias de='docker exec -it'
-alias dla='docker container ls -a'
-alias dil='docker image ls'
-alias di='docker image' ls'
-alias di='docker image' rm'
-alias dcc='docker commit -p'
-alias dcl='docker load -i'
-alias dip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-# Start docker compose in `detatched` mode.
-alias ddup='docker-compose up -d --build'
-# Start docker compose in `interactive` mode.
-alias dup='docker-compose up --build'
-alias dh='docker stop'
-# Run command in already running container e.g. dr <image name< <command>
-alias dr='docker run -it'
-alias dre='docker run -it --entrypoint /bin/bash'
-alias dcrup='docker-compose build --force-rm --no-cache'
+# alias dps='docker ps -a'
+# alias dk='docker kill'
+# alias drm='docker rm -v'
+# alias dti='docker rm -v $(docker ps -a -q -f status=exited) && docker rmi $(docker images -f "dangling=true" -q)'
+# alias de='docker exec -it'
+# alias dla='docker container ls -a'
+# alias dil='docker image ls'
+# #alias di='docker image' ls'
+# #alias di='docker image' rm'
+# #alias dcc='docker commit -p'
+# #alias dcl='docker load -i'
+# #alias dip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
+# # Start docker compose in `detatched` mode.
+# alias ddup='docker compose up -d --build'
+# # Start docker compose in `interactive` mode.
+# alias dup='docker compose up --build'
+# #alias dh='docker stop'
+# # Run command in already running container e.g. dr <image name< <command>
+# alias dr='docker run -it'
+# alias dre='docker run -it --entrypoint /bin/bash'
+# alias dcrup='docker-compose build --force-rm --no-cache'
+# alias dce='docker compose exec'
 
 function drl() {
   docker run --rm -it "$1" bash
@@ -136,7 +139,17 @@ function kph() {
 
 # AWS CLI aliases
 alias al1='eval $(aws ecr get-login --no-include-email --region eu-west-1)'
-alias al2='aws ecr get-login-password --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
+alias al2='aws ecr get-login-password --profile common-ecr --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
+alias als='aws s3 ls --human-readable'
+alias acp='aws s3 cp '
+alias alwqa='als s3://defra-public-registers/WQA/'
+alias acpwqa='acp s3://defra-public-registers/WQA/'
+
+function acpr() {
+  aws s3 ls $1 | awk '{print $4}' | while read file; do
+  aws s3 cp s3://your-bucket-name/path/$file $2
+done
+}
 
 alias gup='for f in `ls`; do cd $f; git pull; cd ..; done'
 
@@ -178,3 +191,38 @@ alias kflp='mplayer -ss 2485 -endpos 48:35 ~/docs/mystuff/skateboarding/SMS1.mp4
 
 # Bastion login
 alias bas='ssh mark.small@bastion.eu-west-1.testing.astrosat.net -D 5555'
+
+alias cenv='source /opt/conda/etc/profile.d/conda.sh'
+
+# Kubectl
+
+function dcsec {
+  local secret=${1:?"Secret to decode must be specified as first parameter"}
+  local namespace=${2:="default"}
+ 
+  kubectl get secret -n ${namespace} ${secret} -o json | jq '.data | map_values(@base64d)'
+}
+
+# helm
+alias hrl='helm repo list'
+alias hra='helm repo add'
+alias hla='helm ls -Aa'
+alias hin='helm install'
+alias hup='helm upgrade'
+alias hun='helm uninstall --keep-history'
+alias hst='helm status'
+alias hrb='helm rollback'
+alias hsr='helm search repo -l'
+
+# asdf version manager
+alias apa='asdf plugin add'
+alias apla='asdf plugin list all'
+alias al='asdf list'
+alias ai='asdf install'
+
+# Telespazio
+alias dsp3='cd ~/dev/projects/github/telespazio/dsp3'
+
+# Agrimetrics
+alias aggl='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics" gl'
+alias ag='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics"'

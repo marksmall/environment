@@ -1,32 +1,22 @@
 #!/bin/bash
 
-apt install -y zsh emacs-nox tmux firewalld apt-transport-https ca-certificates curl gnupg2 software-properties-common powerline vim ripgrep aptitude libreoffice meld inkscape okular kontact imagemagick firefox choqok sddm-theme-breeze sddm-theme-debian-breeze
+apt install -y zsh emacs-nox tmux ufw apt-transport-https ca-certificates curl gnupg2 software-properties-common powerline vim ripgrep aptitude libreoffice meld inkscape okular kontact imagemagick firefox choqok sddm-theme-breeze sddm-theme-debian-breeze make zlib1g zlib1g-dev fail2ban chkrootkit rkhunter network-manager-openvpn htop libbz2-1.0 libbz2-dev bzip2 libreadline-dev libzip-dev libssl-dev libffi-dev sshpass
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+#curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+#add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+apt-get remove docker docker-engine docker.io containerd runc
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 add-apt-repository "deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main"
 
-curl -fsSL https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
-#curl -fsSL https://slack.com/gpg/slack_pubkey.gpg | apt-key add -
-#wget -q https://slack.com/gpg/slack_pubkey.gpg -O- | apt-key add -
-add-apt-repository "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main"
-
-curl -sS https://download.spotify.com/debian/pubkey.gpg | apt-key add -
-add-apt-repository "deb http://repository.spotify.com stable non-free"
-
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-add-apt-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-
-wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub -O- | apt-key add -
-add-apt-repository "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
-
-curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-add-apt-repository "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ buster main"
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install ./google-chrome-stable_current_amd64.deb
 
 wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O- | sudo apt-key add -
 
 apt upgrade
-apt install -y docker-ce docker-ce-cli containerd.io docker-compose google-chrome-stable code slack-desktop spotify-client postgresql
+apt install -y docker-ce docker-ce-cli containerd.io docker-compose google-chrome-stable code postgresql
 
+# Install ansible binaries.
+pip install ansible

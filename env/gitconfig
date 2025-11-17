@@ -1,6 +1,7 @@
 [user]
 	name = Mark Small
-	email = mark.small@astrosat.space
+	email = mark.small@telespazio.com
+	signingkey = 587BFA854C0ABA5C81F2A579DEB8370834BF1105
 
 [color]
         diff = auto
@@ -32,12 +33,14 @@
 	showDirtyState = true
 [diff]
 [init]
+	defaultBranch = master
 [push]
 	default = current
 [merge]
 	tool = meld
 [commit]
-  template = ~/.gitmessage
+        template = ~/.gitmessage
+	gpgsign = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

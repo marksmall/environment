@@ -6,3 +6,5 @@ bundle/
 repository/
 elpa
 */shell_secrets
+env/m2/wrapper
+env/emacs.d/eln-cache

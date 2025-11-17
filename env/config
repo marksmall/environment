@@ -10,14 +10,59 @@ Host lisa
 
 Host hibees
   Port 1973
-  Hostname 192.168.178.39
+  Hostname 192.168.178.84
   User msmall
 
+
+## Telespazio
+Host Agrimetrics_Github
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_agrimetrics
+
+Host copydataadmin
+  HostName 4.234.150.94
+  User dsp3user
+  Port 22
+  IdentityFile ~/.ssh/copydata-key
+
+Host copydata
+  HostName 4.234.150.94
+  User msmall
+  Port 22
+  IdentityFile ~/.ssh/copydata-key
+  # pass tH7lx-9fZoLm-p3
+
+Host dataprocessing
+  HostName 172.26.16.168
+  User msmall
+  Port 22
+  #IdentityFile ~/.ssh/dataprocessing
+
+Host crii-server
+  HostName 172.26.16.36
+  User msmall
+  Port 22
+  IdentityFile ~/.ssh/crii
+
+Host crii-frontend
+  HostName 172.26.17.36
+  User msmall
+  Port 22
+  IdentityFile ~/.ssh/crii
+
+Host wqa-tunnel
+  HostName 20.162.203.65
+  User azureuser
+  LocalForward 5432 localhost:5432
+  IdentityFile ~/.ssh/ssh_tunnel.pem
+
+
+# Astrosat
 Host office
   Hostname office.astrosat.space
   User mark.small
 
-# Astrosat
 Host data1
     Hostname 192.168.100.23
     User mark.small
@@ -31,11 +76,15 @@ Host discovery
     User mark.small
     ProxyJump office
 Host rusty1
-  HostName 192.168.100.41
+    HostName 192.168.100.41
     User mark.small
     ProxyJump office
 Host rusty2
-  HostName 192.168.100.42
+    HostName 192.168.100.42
+    User mark.small
+    ProxyJump office
+Host coruscant
+    HostName 192.168.100.26
     User mark.small
     ProxyJump office
 
