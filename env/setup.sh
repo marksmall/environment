@@ -24,11 +24,11 @@ gpg --batch --generate-key foo
 rm -rf foo
 
 # Setup oh-my-zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+[ -d $HOME/.oh-my-zsh ] || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 # autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+[ -d $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] || git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+[ -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Setup static files.
 # Delete existing files
@@ -55,29 +55,29 @@ rm -rf $HOME/.profile\
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Recreate from configured.
-ln -s $DIR/profile $HOME/.profile
-ln -s $DIR/bashrc $HOME/.bashrc
-ln -s $DIR/bashrc_mark-small $HOME/.bashrc_mark-small
-ln -s $DIR/bashrc_as $HOME/.bashrc_as
-ln -s $DIR/emacs $HOME/.emacs
-ln -s $DIR/emacs.d $HOME/.emacs.d
-ln -s $DIR/gitconfig $HOME/.gitconfig
-ln -s $DIR/gitmessage $HOME/.gitmessage
-ln -s $DIR/gitignore $HOME/.gitignore
-ln -s $DIR/vimrc $HOME/.vimrc
-ln -s $DIR/inputrc $HOME/.inputrc
-ln -s $DIR/zshrc $HOME/.zshrc
-ln -s $DIR/shell_aliases $HOME/.shell_aliases
-ln -s $DIR/shell_secrets $HOME/.shell_secrets
-ln -s $DIR/fonts $HOME/.fonts
-ln -s $DIR/k5login $HOME/.k5login
+[ -L $HOME/.profile ] || ln -s $DIR/profile $HOME/.profile
+#ln -s $DIR/bashrc $HOME/.bashrc
+#ln -s $DIR/bashrc_mark-small $HOME/.bashrc_mark-small
+#ln -s $DIR/bashrc_as $HOME/.bashrc_as
+[ -L $HOME/.emacs ] || ln -s $DIR/emacs $HOME/.emacs
+[ -L $HOME/.emacs.d ] || ln -s $DIR/emacs.d $HOME/.emacs.d
+[ -L $HOME/.gitconfig ] || ln -s $DIR/gitconfig $HOME/.gitconfig
+[ -L $HOME/.gitmessage ] || ln -s $DIR/gitmessage $HOME/.gitmessage
+[ -L $HOME/.gitignore ] || ln -s $DIR/gitignore $HOME/.gitignore
+[ -L $HOME/.vimrc ] || ln -s $DIR/vimrc $HOME/.vimrc
+[ -L $HOME/.inputrc ] || ln -s $DIR/inputrc $HOME/.inputrc
+[ -L $HOME/.zshrc ] || ln -s $DIR/zshrc $HOME/.zshrc
+[ -L $HOME/.shell_aliases ] || ln -s $DIR/shell_aliases $HOME/.shell_aliases
+[ -L $HOME/.shell_secrets ] || ln -s $DIR/shell_secrets $HOME/.shell_secrets
+[ -L $HOME/.fonts ] || ln -s $DIR/fonts $HOME/.fonts
+#ln -s $DIR/k5login $HOME/.k5login
 #ln -s $DIR/msmall-agnoster.zsh-theme $HOME/.oh-my-zsh/themes/msmall-agnoster.zsh-theme
-ln -s $DIR/m2 $HOME/.m2
-ln -s $DIR/tmux.conf $HOME/.tmux.conf
-ln -s $DIR/ackrc $HOME/.ackrc
+[ -L $HOME/.m2 ] || ln -s $DIR/m2 $HOME/.m2
+[ -L $HOME/.tmux.conf ] || ln -s $DIR/tmux.conf $HOME/.tmux.conf
+#ln -s $DIR/ackrc $HOME/.ackrc
 
 mkdir -p $HOME/config/direnv
-ln -s $DIR/python-env.sh $HOME/config/direnv/python-env.sh
+[ -L $HOME/config/direnv/python-env.sh ] || ln -s $DIR/python-env.sh $HOME/config/direnv/python-env.sh
 
 # Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -90,11 +90,11 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vi
 
 ## Add vim plugins
 cd ~/.vim/bundle
-git clone git://github.com/altercation/vim-colors-solarized.git
-git clone git://github.com/tpope/vim-sensible.git
+[ -d $HOME/.vim/bundle/vim-colors-solarized ] || git clone git://github.com/altercation/vim-colors-solarized.git
+[ -d $HOME/.vim/bundl/vim-sensible ] || git clone git://github.com/tpope/vim-sensible.git
 
 # Add TMUX Plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+[ -d $HOME/.tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Add Node Version manager
 #git clone https://github.com/nodenv/nodenv.git ~/.nodenv
