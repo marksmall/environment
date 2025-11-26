@@ -122,17 +122,17 @@ asdf install awscli latest
 asdf plugin add azure-cli https://github.com/EcoMind/asdf-azure-cli              
 asdf install azure-cli latest
 asdf plugin add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git
-asdf install dotnet-core 8.0.414,9.0.304
+asdf install dotnet-core 8.0.414 9.0.304
 asdf plugin add kubectl https://github.com/asdf-community/asdf-kubectl.git       
 asdf install kubectl 1.22.17 
 asdf plugin add kubelogin https://github.com/sechmann/asdf-kubelogin.git         
 asdf install kubelogin latest,0.2.8 
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git                
-asdf install nodejs latest,22.17.1
+asdf install nodejs latest 22.17.1
 asdf plugin add poetry https://github.com/asdf-community/asdf-poetry.git         
-asdf install poetry 2.1,3,2.2.0 
+asdf install poetry 2.1.3 2.2.0 
 asdf plugin add python https://github.com/asdf-community/asdf-python.git         
-asdf install python latest,3.10.11
+asdf install python latest 3.10.11
 
 
 chsh `whoami` -s /bin/zsh
