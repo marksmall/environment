@@ -33,9 +33,9 @@ rm -rf foo
 # Setup static files.
 # Delete existing files
 rm -rf $HOME/.profile\
-       $HOME/.bashrc \
-       $HOME/.bashrc_mark-small \
-       $HOME/.bashrc_as\
+       #$HOME/.bashrc \
+       #$HOME/.bashrc_mark-small \
+       #$HOME/.bashrc_as\
        $HOME/.emacs \
        $HOME/.emacs.d \
        $HOME/.gitconfig \
@@ -45,11 +45,11 @@ rm -rf $HOME/.profile\
        $HOME/.inputrc \
        $HOME/.zshrc \
        $HOME/.fonts \
-       $HOME/.k5login \
+       #$HOME/.k5login \
        #$HOME/.oh-my-zsh/themes/msmall-agnoster.zsh-theme \
        $HOME/.m2 \
        $HOME/.tmux.conf \
-       $HOME/.ackrc \
+       #$HOME/.ackrc \
        $HOME/.ssh/config
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -135,4 +135,4 @@ asdf plugin add python https://github.com/asdf-community/asdf-python.git
 asdf install python latest 3.10.11
 
 
-chsh `whoami` -s /bin/zsh
+#chsh `whoami` -s /bin/zsh
