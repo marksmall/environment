@@ -54,6 +54,8 @@ export LANGUAGE=en_GB.UTF-8
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+eval "$(direnv hook zsh)"
+
 export DOCKER_BUILDKIT=1
 export BUILDKIT_PROGRESS=plain
 export COMPOSE_DOCKER_CLI_BUILD=1
