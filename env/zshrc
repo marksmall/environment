@@ -30,7 +30,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(aws colorize colored-man-pages debian docker extract git git-extras gnu-utils helm history-substring-search kubectl mark pipenv terraform tmux vagrant zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(aws azure colorize colored-man-pages debian docker dotnet extract gh gh-local git git-extras git-local gnu-utils helm history-substring-search kubectl kubectl-local mark pnpm terraform tmux vagrant virtualenv zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(aws azure colorize colored-man-pages debian docker dotnet extract gh gh-local git git-extras git-local gnu-utils helm history-substring-search kubectl kubectl-local mark mise-local pnpm terraform tmux vagrant virtualenv zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
