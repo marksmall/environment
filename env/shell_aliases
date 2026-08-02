@@ -94,18 +94,6 @@ function ri() {
   convert $1 -resize $2\! $3
 }
 
-function ksdv() {
-  kubectl get secret $1 -o yaml | grep $2 | awk '{print $2}' | base64 --decode
-}
-
-function kas() {
-  kubectl get secret $1 -o json | jq '.data | with_entries(.value |= @base64d)'
-}
-
-function kph() {
-  kubectl describe pods -l app=$1,instance=$2 | grep -A 5 Conditions
-}
-
 # AWS CLI aliases
 alias al1='eval $(aws ecr get-login --no-include-email --region eu-west-1)'
 alias al2='aws ecr get-login-password --profile common-ecr --region eu-west-1 | docker login 339570402237.dkr.ecr.eu-west-1.amazonaws.com --username AWS --password-stdin'
@@ -141,10 +129,6 @@ alias tgap='terragrunt apply -auto-approve'
 
 alias rq='convert -strip -quality'
 
-# Get all pods in Terminated / Evicted State
-alias epods='kubectl get pods -n default | egrep -i "Terminated|Evicted" | awk "{print $1 }"'
-alias depods='kubectl get pods -n default | egrep -i "Terminated|Evicted" | cut -d " " -f 1 | xargs kubectl delete pod --force=true --wait=false --grace-period=0'
-
 alias experimentation='ssh -i ~/downloads/orbis_experimentation_management ubuntu@54.73.142.239 -D 5555'
 
 # Skateboarding
@@ -160,15 +144,6 @@ alias kflp='mplayer -ss 2485 -endpos 48:35 ~/docs/mystuff/skateboarding/SMS1.mp4
 alias bas='ssh mark.small@bastion.eu-west-1.testing.astrosat.net -D 5555'
 
 alias cenv='source /opt/conda/etc/profile.d/conda.sh'
-
-# Kubectl
-
-function dcsec {
-  local secret=${1:?"Secret to decode must be specified as first parameter"}
-  local namespace=${2:="default"}
- 
-  kubectl get secret -n ${namespace} ${secret} -o json | jq '.data | map_values(@base64d)'
-}
 
 # helm
 alias hrl='helm repo list'
