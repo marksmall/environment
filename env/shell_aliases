@@ -52,37 +52,6 @@ alias hold='apt-mark hold'
 alias unhold='apt-mark unhold'
 alias afl='apt-file list'
 
-
-alias gt='git tag -n'
-alias gm='git merge --ff-only'
-alias gd='git diff -w --'
-alias gdc='git diff -w --cached --'
-alias gs='git stash'
-alias gsl='git stash list'
-alias gsp='git stash pop'
-alias gsc='git stash clear'
-alias gss='git stash show -p'
-alias gf='git fetch'
-alias gfd='git fetch && git diff $(current_branch) origin/$(current_branch)'
-alias gcl='git clone'
-alias gg='git log --stat'
-alias gl='git pull --ff-only --rebase'
-alias gbs='git branch-status'
-alias gr='git rebase'
-alias gcf='git clean -fd'
-alias grp='git remote prune origin'
-alias gpo='git push -u origin'
-alias gfa='git fetch --all'
-alias gfl='git fetch && git log $(current_branch) origin/$(current_branch)'
-alias gbl='git blame'
-alias grhh='git reset --hard'
-alias gsh='git show'
-alias gsk='git stash --keep-index'
-alias gsu='git submodule update --init --recursive'
-alias gpa='for f in `ls`; do echo $f; cd $f; git pull; cd ..; done'
-alias gpn='git push --no-verify'
-alias grev='git revert'
-
 alias diff='colordiff -u'
 
 # Docker Aliases
@@ -150,8 +119,6 @@ function acpr() {
   aws s3 cp s3://your-bucket-name/path/$file $2
 done
 }
-
-alias gup='for f in `ls`; do cd $f; git pull; cd ..; done'
 
 # terraform aliases
 alias tf='terraform fmt'
