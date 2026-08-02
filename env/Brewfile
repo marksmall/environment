@@ -1,0 +1,19 @@
+tap "derailed/k9s"
+tap "fluxcd/tap"
+# Azure Storage data transfer utility
+brew "azcopy"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Polyglot runtime manager
+brew "mise"
+# Build vector tilesets from collections of GeoJSON features
+brew "tippecanoe"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+vscode "anthropic.claude-code"
+vscode "eamodio.gitlens"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "usernamehw.errorlens"
+npm "corepack"

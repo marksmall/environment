@@ -214,12 +214,6 @@ alias hst='helm status'
 alias hrb='helm rollback'
 alias hsr='helm search repo -l'
 
-# asdf version manager
-alias apa='asdf plugin add'
-alias apla='asdf plugin list all'
-alias al='asdf list'
-alias ai='asdf install'
-
 # Telespazio
 alias dsp3='cd ~/dev/projects/github/telespazio/dsp3'
 
