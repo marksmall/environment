@@ -30,7 +30,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(aws colorize colored-man-pages debian docker extract git git-extras gnu-utils helm history-substring-search kubectl mark pipenv terraform tmux vagrant zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(aws azure colorize colored-man-pages debian docker dotnet extract gh gh-local git git-extras git-local gnu-utils helm history-substring-search kubectl kubectl-local mark mise-local pnpm terraform tmux vagrant virtualenv zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(atlassian-local aws azure colorize colored-man-pages debian docker dotnet extract gh gh-local git git-extras git-local gnu-utils helm history-substring-search kubectl kubectl-local mark mise-local pnpm terraform tmux vagrant virtualenv zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -49,10 +49,9 @@ setopt SHARE_HISTORY
 
 #export JAVA_HOME=/usr/lib/jvm/jdk-17
 
-
 #export PATH=$JAVA_HOME/bin:$HOME/.local/bin:/usr/local/bin:$PYENV_ROOT/bin:$NODENV_HOME/bin:$HOME/bin:$HOME/local/bin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/games:/sbin
 #export PATH=$JAVA_HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/bin:$HOME/local/bin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/games:/sbin
-export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/bin:$HOME/local/bin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/games:/sbin:$HOME/dev/tools/codemods
+export PATH=$HOME/.local/share/mise/shims:$HOME/.local/bin:/usr/local/bin:$HOME/bin:$HOME/local/bin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/games:/sbin:$HOME/dev/tools/codemods:$HOME/.dotnet/tools
 
 export EDITOR=emacs
 export PAGER=less
@@ -135,3 +134,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+export DELTA_PAGER="less -R"

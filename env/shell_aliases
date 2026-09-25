@@ -1,11 +1,16 @@
 # Aliases
 
+alias cat='bat'
+alias less='bat'
+alias fd='fdfind'
 alias watch='watch '
 alias top='htop'
 alias vless='vim -u /usr/share/vim/vimcurrent/macros/less.vim'
 alias rm='rm -v'
 alias pjson='python -m json.tool'
 alias generate-secret='openssl rand -base64 32'
+
+alias fdnm='fd -td -HI '^node_modules$' -X rm -rf'
 
 # Get a long listing using colours and human readable values for file size.
 alias l='ls -lh --color=auto'
@@ -53,6 +58,9 @@ alias unhold='apt-mark unhold'
 alias afl='apt-file list'
 
 alias diff='colordiff -u'
+
+## Ripgrep Aliases
+alias rgh='rg --follow --hidden --no-ignore-vcs'
 
 # Docker Aliases
 # alias dps='docker ps -a'
@@ -162,3 +170,89 @@ alias dsp3='cd ~/dev/projects/github/telespazio/dsp3'
 # Agrimetrics
 alias aggl='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics" gl'
 alias ag='GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_agrimetrics"'
+
+export GITOPS_DIR='/home/msmall/dev/projects/github/telespazio/dsp3/agm/gitops-buildkite'
+
+# Retrieves Kubernetes secrets for the current project and either prints them
+# or sources them into the current shell as environment variables.
+#
+# The function determines the project name from the current directory, stripping
+# any "agrimetrics-" prefix. It then locates the corresponding Helm release
+# deployment file in the gitops repo (referenced by $GITOPS_DIR) for the
+# currently active Kubernetes context.
+#
+# Deployment files are searched in the following order:
+#   1. $GITOPS_DIR/<context>/helm-releases/api/<name><version>.yaml
+#   2. $GITOPS_DIR/<context>/helm-releases/ingestion/<name><version>.yaml
+#   3. $GITOPS_DIR/<context>/helm-releases/api/<name-without-api-suffix><version>.yaml
+#
+# Special cases:
+#   - "backend" is mapped to "app-backend" with no version suffix
+#   - All other projects use a "-v1" version suffix
+#
+# Dependencies:
+#   - $GITOPS_DIR must be set to the path of the gitops repository
+#   - kubectl must be configured with a valid current context
+#   - k8s_secrets must be available on $PATH
+#
+# Usage:
+#   secrets        # Sources secrets as env vars into the current shell
+#   secrets -p     # Prints secrets to stdout without sourcing
+function secrets() {
+  echo Retrieving secrets for $(pwd)
+  name=$(basename $(pwd))
+  name=${name#agrimetrics-}
+  opt=${1}
+
+  case $name in 
+    backend)
+      name=app-backend
+      version=
+      ;;
+    *)
+     name=$name
+     version=-v1
+     ;;
+  esac
+
+  context=$(kubectl config current-context)
+
+  deploy=${GITOPS_DIR}/${context}/helm-releases/api/${name}${version}.yaml
+  [ ! -f ${deploy} ] && {
+    deploy=${GITOPS_DIR}/${context}/helm-releases/ingestion/${name}${version}.yaml
+    namespace="--namespace=ingestion"
+  }
+
+  [ ! -f ${deploy} ] && {
+    name=${name%-api}
+    deploy=${GITOPS_DIR}/${context}/helm-releases/api/${name}${version}.yaml
+    unset namespace
+  }
+
+  if [ -f $deploy ]; then
+    if [ "${opt}" = "-p" ]; then
+      k8s_secrets -s get-env ${namespace} $deploy
+    else
+     . <(k8s_secrets -s get-env ${namespace} $deploy)
+    fi
+  else
+    echo Deployment file not found: $deploy
+  fi
+}
+
+# Function to take download
+function httpb() {
+  local url=${1:?"URL to fetch data from, must be specified as first parameter"}
+
+  # HTTPB_AUTH (user:password) is set in ~/.shell_secrets.
+  http --body -a "${HTTPB_AUTH:?HTTPB_AUTH must be set in ~/.shell_secrets}" GET "${url}" Accept:'application/json' | jq --indent 2 .
+}
+
+## Openvpn
+
+alias vpnu="openvpn3 session-start --config ~/.config/vpn/dsp-vpn.ovpn"
+alias vpnl="openvpn3 sessions-list"
+alias vpnd="openvpn3 session-manage --config ~/.config/vpn/dsp-vpn.ovpn --disconnect"
+
+# Glow (command-line markdown viewer.
+alias glow='glow -p'

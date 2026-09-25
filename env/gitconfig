@@ -13,6 +13,7 @@
 	excludesfile = /home/msmall/.gitignore
 	autocrlf = input
 	editor = emacs
+        pager = delta
 [alias]
 	st = status
 	co = checkout
@@ -32,12 +33,17 @@
 [bash]
 	showDirtyState = true
 [diff]
+        diffFilter = delta --color-only
+[delta]
+        navigate = true # use n and N to move between diff sections
+        dark = true     # or light = true, or omit for auto-detection
 [init]
 	defaultBranch = master
 [push]
 	default = current
 [merge]
 	tool = meld
+        conflictStyle = zdiff3
 [commit]
         template = ~/.gitmessage
 	gpgsign = true

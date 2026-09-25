@@ -31,3 +31,22 @@ alias gpa='for f in `ls`; do echo $f; cd $f; git pull; cd ..; done'
 alias gpn='git push --no-verify'
 alias gbsc='git branch --sort=-committerdate'
 alias gup='for f in `ls`; do cd $f; git pull; cd ..; done'
+
+## Search through logs for words, the author is optional but
+## must come first if used, the list of words after is dynamic.
+gls() {
+  local author="$1"
+  shift
+
+  local args=(-i)
+
+  if [[ -n "$author" ]]; then
+    args+=(--author="$author")
+  fi
+
+  for term in "$@"; do
+    args+=(--grep="$term")
+  done
+
+  git log "${args[@]}" --stat
+}
