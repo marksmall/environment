@@ -1,3 +1,8 @@
+# ~/.ssh/config
+
+# Private work hosts (gitignored). Include must come before any Host block.
+Include ~/.environment/env/config.private
+
 Host homer
   Port 1973
   Hostname 217.155.193.113

@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
-# Determine venv dir
 VENV_DIR=".venv"
 
-# Create .venv if missing
-if [ ! -d "$VENV_DIR" ]; then
-  python3 -m venv "$VENV_DIR"
-fi
-
-# Activate it
-source "$VENV_DIR/bin/activate"
-
-# Install deps
-if [ -f "pyproject.toml" ]; then
+if [ -f "uv.lock" ] && command -v uv &>/dev/null; then
+  uv sync --all-extras
+  source "$VENV_DIR/bin/activate"
+elif [ -f "pyproject.toml" ]; then
+  if [ ! -d "$VENV_DIR" ]; then
+    python3 -m venv "$VENV_DIR"
+  fi
+  source "$VENV_DIR/bin/activate"
   if grep -q '\[tool.poetry\]' pyproject.toml && command -v poetry &>/dev/null; then
     poetry install
   else
@@ -20,8 +17,16 @@ if [ -f "pyproject.toml" ]; then
     pip install -e . || true  # fallback if PEP 621 style
   fi
 elif [ -f "Pipfile" ]; then
+  if [ ! -d "$VENV_DIR" ]; then
+    python3 -m venv "$VENV_DIR"
+  fi
+  source "$VENV_DIR/bin/activate"
   pip install pipenv
   pipenv install --dev
 elif [ -f "requirements.txt" ]; then
+  if [ ! -d "$VENV_DIR" ]; then
+    python3 -m venv "$VENV_DIR"
+  fi
+  source "$VENV_DIR/bin/activate"
   pip install -r requirements.txt
 fi
