@@ -1,0 +1,15 @@
+# Sourced by every zsh invocation (interactive, non-interactive, login, or
+# not) — unlike .zshrc, which only loads for interactive shells. mise's own
+# PATH management (`mise activate`, in zshrc) works via shell hooks that only
+# fire in an interactive prompt loop, so anything that runs a bare non-
+# interactive shell (editor/IDE tooling, scripts, CI) never picks it up.
+# Putting mise's static shims directory here — the same role ~/.asdf/shims
+# played before migrating off asdf — makes tool resolution work everywhere,
+# not just in an interactive terminal.
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+# Same reasoning as above: `mise use -g` and friends read MISE_GLOBAL_CONFIG_FILE
+# directly, with no dependency on shell hooks — but only if it's set before mise
+# runs. Setting it here (not zshrc) means it's honored in non-interactive shells
+# too (editor/IDE tooling, scripts, CI), not just an interactive prompt.
+export MISE_GLOBAL_CONFIG_FILE="$HOME/.mise.toml"

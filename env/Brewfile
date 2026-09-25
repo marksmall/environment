@@ -1,19 +1,34 @@
+# Regenerate after installing/removing anything: brew bundle dump --file=~/.environment/env/Brewfile --force
+# Runtimes/CLI versions live in mise.toml, not here.
+tap "buildkite/buildkite", trusted: true
 tap "derailed/k9s"
 tap "fluxcd/tap"
+tap "omar16100/atlassian-cli"
 # Azure Storage data transfer utility
 brew "azcopy"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Polyglot runtime manager
+# LastPass command-line interface tool
+brew "lastpass-cli"
+# Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # Build vector tilesets from collections of GeoJSON features
 brew "tippecanoe"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# Work with Buildkite from the command-line
+brew "buildkite/buildkite/bk@3"
+# Unified CLI for Atlassian Cloud products
+brew "omar16100/atlassian-cli/atlassian-cli", trusted: true
 vscode "anthropic.claude-code"
 vscode "eamodio.gitlens"
+vscode "ms-azuretools.vscode-azureresourcegroups"
 vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-cosmosdb"
 vscode "ms-azuretools.vscode-docker"
+vscode "ms-azuretools.vscode-documentdb"
 vscode "streetsidesoftware.code-spell-checker"
 vscode "usernamehw.errorlens"
+npm "azure-functions-core-tools"
 npm "corepack"
+npm "yalc"
